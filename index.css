@@ -1,0 +1,131 @@
+body{
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+  background-image: URL(bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+head{
+  font-size: 10px;
+}
+.container{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  font-size: 10px;
+}
+.panel-title{
+  font-size:15px;
+}
+.table{
+  background-color: #e4e7f7;
+}
+#appContainer{
+  display: flex;
+  flex-direction: row;
+}
+
+.panel{
+  padding: 5px;
+}
+input::-webkit-input-placeholder {
+  /* placeholder颜色  */
+  color: #bdaaaa;
+  /* placeholder字体大小  */
+  font-size: 10px;
+}
+#class-table td,#class-table th{
+  vertical-align:middle;
+  margin: 0 auto;
+  border: 1px solid WHITE ;
+  padding: 0;
+  text-align:center;
+}
+#暂无数据{
+  background-color: rgb(240, 137, 137);
+  min-height: 70;
+}
+.classInfo{
+  min-height: 70;
+  display: flex;
+  flex-direction: column;
+  text-align:center;
+  align-content: center;
+  border: 1px solid WHITE ;
+  padding: 0;
+  border-radius: 10%;
+}
+.classContainer{
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+}
+.selectTable{
+  display: block;
+  max-height:200px;
+  min-height: 100px;
+  overflow : scroll;
+}
+.panel-body{
+  min-height:190px;
+}
+.selectTable>th{
+  border: 1px solid WHITE ;
+}
+
+#class-table{
+  margin-top: 50px;
+}
+.app{
+  max-height:600px;
+  min-height:445px;
+  margin:30px;
+  min-width: 374px;
+}
+.mtt_bgcolor_grey {
+  vertical-align: middle;
+  width: 30px;
+  height: 40px;
+  text-align: center;
+  border-top: 1px solid #d8dcf0;
+  border-right: 1px solid #d8dcf0;
+  box-sizing: border-box;
+}
+
+.week{
+  width:150px;
+  background-color:DarkOrchid;
+  color: white;
+}
+#select{
+  display: flex;
+  flex-direction: row;
+}
+#unselect{
+  display: flex;
+  flex-direction: row;
+}
+#selected{
+  background-color: #d8dcf0;
+  display: inline;
+  text-align: center;
+  border-top: 1px solid #d8dcf0;
+  border-right: 1px solid #d8dcf0;
+  box-sizing: border-box;
+}
+#unselected{
+  background-color: #d8dcf0;
+  display: inline;
+  text-align: center;
+  
+  border-top: 1px solid #d8dcf0;
+  border-right: 1px solid #d8dcf0;
+  box-sizing: border-box;
+}
+#selectedDiv{
+  background-color: #d8dcf0;
+  display: inline;
+  text-align: center;
+  border-top: 1px solid #d8dcf0;
+  border-right: 1px solid #d8dcf0;
+  box-sizing: border-box;
+}

@@ -1,0 +1,42 @@
+/*根据不同的课程序号给予不同的id然后根据不同的id为不同的课程配置不同的颜色*/
+/*粉红pink 灰色grey 浅绿rgb(135, 253, 105) 蓝色#2d8cf0 浅蓝#5cadff 亮蓝#2db7f5 亮绿#19be6b 黄#ff9900 橘黄#ed4014*/
+#A123{
+    background-color: black;
+}
+#A124{
+    background-color: pink;
+}
+#A125{
+    background-color: GREEN;
+}
+#微型计算机原理{
+    background-color: yellow;
+
+}
+#A126{
+    background-color: yellow;
+}
+#A127{
+    background-color: red;
+}
+#A128{
+    background-color: grey;
+}
+#A129{
+    background-color: rgb(173, 69, 69);
+}
+#A130{
+    background-color: rgb(61, 23, 23);
+}
+#A131{
+    background-color: rgb(58, 56, 179);
+}
+#A132{
+    background-color: rgb(238, 59, 59);
+}
+#A133{
+    background-color: rgb(135, 253, 105);
+}
+#A134{
+    background-color: black;
+}

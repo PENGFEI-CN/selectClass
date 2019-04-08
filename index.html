@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>插入列表测试</title>
+    <!-- 引入vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    <meta charset="utf-8" />
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="classTable.css">
+  </head>
+  <body>
+    <div class="container">
+      <!--
+      <div id="select">
+        <form action="" method="get" id="form1">
+          <input type="text" name="clasName" value="" placeholder="请输入需要选择的课程">
+        </form>
+        <div id="selectedDiv">
+          <div id="selected">
+          </div>
+        </div>
+      </div>
+      <div id="unselect">
+        <form action="" method="get" id="form2">
+          <select name="week" id="week">
+            <option value="1">周一</option>
+            <option value="2">周二</option>
+            <option value="3">周三</option>
+            <option value="4">周四</option>
+            <option value="5">周五</option>
+            <option value="6">周五</option>
+            <option value="7">周五</option>
+          </select>
+          <select name="class" id="class">
+            <option value="1">1-2节</option>
+            <option value="2">3-4节</option>
+            <option value="3">5-6节</option>
+            <option value="4">7-8节</option>
+            <option value="5">9-10节</option>
+          </select>
+          <input type="submit" value="allin">
+        </form>
+        <div id="unselected">
+        </div>
+      </div>-->
+      <div id="appContainer">
+        <div id="app" class="app">
+            <div class="select">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">添加选择课程</h4>
+                    </div>
+                    <div class="panel-body form-inline">
+                        <!--
+                        <label>课程名:
+                            <input type="text" class="form-control" v-model="name" @keyup.enter="add">
+                        </label>-->
+                        <label>
+                            <input type="text" class="form-control" v-color="'blue'" v-focus v-model="keywords"  @keyup.enter="add" placeholder="输入课序号或课程名选择需要的课程   ">
+                        </label>
+                        <table v-cloak class="table table-bordered table-hover table-striped selectTable">
+                            <thead>
+                                <tr>
+                                    <th>课程序号</th>
+                                    <th>课程名</th>
+                                    <th>上课时间</th>
+                                    <th>任课老师</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-cloak v-if="" v-for="item in search(keywords)" :key="item.id">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.ctime}}</td>
+                                    <td>{{item.teacher}}</td>
+                                    <td>
+                                        <a href="" @click.prevent="add(item)">添加</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">需要选择的课程</h4>
+                    </div>
+                    <div class="panel-body form-inline">
+                        <!--
+                        <label>课程名:
+                            <input type="text" class="form-control" v-model="name" @keyup.enter="add">
+                        </label>-->
+                        <table v-cloak class="table table-bordered table-hover table-striped selectTable">
+                            <thead>
+                                <tr>
+                                    <th>课程序号</th>
+                                    <th>课程名</th>
+                                    <th>上课时间</th>
+                                    <th>任课老师</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-cloak v-for="item in selectedList" :key="item.id">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.ctime}}</td>
+                                    <td>{{item.teacher}}</td>
+                                    <td> 
+                                        <a href="" @click.prevent="del(item.id)">删除</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="app2" class="app">
+                <div class="select">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">添加筛选时间</h4>
+                        </div>
+                        <div class="panel-body form-inline">
+                            <form v-cloak action="" >
+                            <div  class="form-group">
+                                    <select class="form-control input-sm" v-model = "selectList.weeks">
+                                        <option value="" disabled selected hidden>请选择周次</option>
+                                        <option  v-for="item in weeks" :key="item" :value="item">{{item}}</option>
+                                    </select>
+                                    <select  class="form-control input-sm" v-model = "selectList.weekday">
+                                        <option  disabled value="">请选择星期数</option>
+                                        <option v-for="item in weekday" :key="item" :value="item">{{item}}</option>
+                                    </select>
+                                    <select class="form-control input-sm" v-model="selectList.classTime">
+                                        <option disabled value="">请选择课程节次</option>
+                                        <option v-for="item in classTime" :key="item" :value="item">{{item}}</option>
+                                    </select>
+                            </div>
+                            <input type="button" @click.prevent="add()" value="添加"> 
+                            </form>     
+                        </div>
+                        <div class="panel-heading">
+                            <h4 class="panel-title">筛选的时间</h4>
+                        </div>
+                        <div class="panel-body form-inline">
+                            <table v-cloak class="table table-bordered table-hover table-striped selectTable">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th colspan="5">时间</th>
+                                    </tr>   
+                                </thead>
+                                <tbody>
+                                    <tr v-cloak v-for="(item,index) in selectedList" :key="index">
+                                        <td>{{index}}</td>
+                                        <td>第{{item.weeks}}周</td>
+                                        <td>{{item.weekday}}</td>
+                                        <td>{{item.classTime}}</td>
+                                        <td>
+                                            <a href="" @click.prevent="del(item.id)">删除</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" @click="click">生成课表</button>
+      <!--利用vue自带的table组件渲染表单？空课程的时候怎么渲染呢？用一个for循环根据返回的课程属性在新建一个固定大小得数组然后根据这个数组渲染列表？-->
+        <div id="app-table">
+            <table width="50%" class="table table-bordered" id="class-table" style="border: 1px solid #aaa">
+                <tbody>
+                    <tr height="37px" width="100%">
+                    <!-- 标题栏-->
+                    <th width="10%" bgcolor=" darkorchid" style="color: white" colspan="2">节次</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">上课时间</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">周日</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">周一</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">周二</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">周三</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">周四</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">周五</th>
+                    <th width="10%" bgcolor=" darkorchid" style="color: white">周六</th>
+                    </tr>
+                    <tr height="74px" align="center">
+                    <td rowspan="2" colspan="1">上午</td>
+                    <td rowspan="1">1-2</td>
+                    <td rowspan="1">8:00-8:45</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo"  :id="classList[num-1].id">
+                                <div class="classContainer" v-for="value in classList[num-1]">   
+                                        {{value}}
+                                </div>
+                            </div>
+                        </td>
+                    <!--
+                    <td rowspan="1" bgcolor="orange">WEB应用技术<br />@D座301</td>
+                    <td rowspan="1"></td>
+                    <td rowspan="1" bgcolor="hotpink">数据库原理<br />@E407</td>
+                    <td rowspan="1"></td>-->
+
+                    </tr>
+                    <tr height="74px" align="center">
+                    <td rowspan="1">3-4</td>
+                    <td rowspan="1">10:00-10:45</td>
+                    <td v-for="num in 7">
+                        <div class="classInfo" 
+                        :id="classList[num+6].id">
+                            <div class="classContainer" v-for="value in classList[num+6]">   
+                                    {{value}}
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+
+                    <tr height="74px" align="center">
+                    <td class="mtt_bgcolor_grey" rowspan="2" colspan="1">下午</td>
+                    <td rowspan="1">5-6</td>
+                    <td rowspan="1">11:50-12:35</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo" :id="classList[num+13].id">
+                                <div class="classContainer"  v-for="value in classList[num+13]">   
+                                        {{value}}
+                                </div>
+                            </div>
+                        </td>   
+                    </tr>
+
+
+                    <tr height="74px" align="center">
+                    <td rowspan="1">7-8</td>
+                    <td rowspan="1">14:55-15:40</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo" :id="classList[num+20].id">
+                                <div class="classContainer" v-for="value in classList[num+20]">   
+                                        {{value}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr height="74px" align="center">
+                    <td class="mtt_bgcolor_grey" rowspan="2" colspan="1">晚上</td>
+
+                    <td rowspan="1">9-10</td>
+                    <td rowspan="1">14:55-15:40</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo" :id="(classList[num+27].id == '' ? unvalue :classList[num+27].id)">
+                                <div class="classContainer" v-for="value in classList[num+27]">   
+                                        {{value == ""? unvalue : value}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>    
+        </div>  
+    </div>
+
+  </body>
+
+  <script>
+    // 定义全局过滤器
+    // Vue.filter('过滤器名称',function(){})
+    // 自定义全局按键修饰符
+    // Vue.config.keyCodes.自定义名称 = keyCode码
+    // 自定义全局指令
+    Vue.directive('focus',{
+        bind:function(el){
+            // 在每个函数中，第一个参数永远是el，表示被绑定了指令的那个元素，这个el参数是一个原生的JS对象
+            // el.focus()  该操作不生效，时机不对
+        },  //每当指令绑定到元素上的时候，会立刻执行这个 bind 函数，智慧执行一次
+        inserted:function(el){
+            el.focus()
+        },  //inserted表示元素 插入到DOM中的时候，会执行 inserted 函数【触发一次】
+        updated:function(){},  //当VNode（组件）更新的时候，会执行 updated ，可能会触发多次
+    })
+    
+    Vue.directive('color',{
+        bind:function(el,binding){
+            // console.log(binding)
+            el.style.color = binding.value
+        },  //每当指令绑定到元素上的时候，会立刻执行这个 bind 函数，智慧执行一次
+    })
+    // 实例化vue对象
+    let vm = new Vue({
+        // 绑定对象
+        el:'#app',
+        data:{
+            id:'',
+            keywords:'',
+            selectedList:[],
+            list:[
+                {id:1,name:'高等数学',ctime:"1-16周 周四早1-2节",teacher:"李一"},
+                {id:2,name:'大学英语',ctime:"1-16周 周一早1-2节",teacher:"王二"},
+                {id:3,name:'大学物理',ctime:"1-16周 周二早1-2节",teacher:"王3"},
+                {id:4,name:'大学体育',ctime:"1-16周 周三早1-2节",teacher:"王4"},
+                {id:5,name:'大学政治',ctime:"1-16周 周五早1-2节",teacher:"王5"},
+                {id:6,name:'微机原理',ctime:"1-16周 周四早1-2节",teacher:"王6"},
+                {id:7,name:'英雄联盟',ctime:"1-16周 周四早1-2节",teacher:"王7"}
+            ]
+        },
+        methods:{
+            add(item){ //添加方法
+                // console.log("添加方法")
+                // 判断有没有输入
+                // 添加到list
+                //console.log(item)
+                this.selectedList.push({id:item.id,name:item.name,ctime:item.ctime,teacher:item.teacher})
+                // 恢复初始值
+            },
+            del(id){
+                console.log("删除方法")
+                // console.log(id)
+                // this.list.some((item,i)=>{
+                //     if(item.id == id){
+                //         this.list.splice(i,1)
+                //         // 在数组的some方法中，如果return true就会立即停止后续循环
+                //         return true
+                //     }
+                // })
+                let index = this.selectedList.findIndex(item=>{
+                    if(item.id == id){
+                        return true
+                    }
+                })
+                this.selectedList.splice(index,1)
+            },
+            search(keywords){
+                // let newList = []
+                // this.list.forEach(item=>{
+                //     if(item.name.indexOf(keywords) != -1){
+                //         newList.push(item)
+                //     }
+                // })
+                // return newList
+                 let newList = this.list.filter(item=>{
+                    // if(item.name.indexOf(keywords) != -1){}
+                    if((item.name.includes(keywords) || item.teacher.includes(keywords) || item.id == (keywords))&& keywords != ''){
+                        return true
+                    }
+                })
+                return newList
+            }
+        },
+        // 私有（局部）过滤器——过滤器有两个条件-【过滤器名称和处理函数】
+        // 过滤器调用的原则为就近原则
+
+    })
+
+    let vm2 = new Vue({
+        // 绑定对象
+        el:'#app2',
+        data:{
+            id:'',
+            keywords:'',
+            selectList:{weeks:"",weekday:"",classTime:""},
+            selectedList:[],
+            weeks:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+            weekday:["周一","周二","周三","周四","周五","周六","周日"],
+            classTime:["1-2","3-4","5-6","7-8","9-10"],
+        },
+        methods:{
+            add(){ //添加方法
+                // console.log("添加方法")
+                // 判断有没有输入
+                // 添加到list
+                // console.log(item) 
+                //console.log(this.selectList)
+                this.selectedList.push({weeks:this.selectList.weeks,weekday:this.selectList.weekday,classTime:this.selectList.classTime})
+                console.log(this.selectedList)
+                // 恢复初始值
+            },
+            del(id){
+                // console.log("删除方法")
+                // console.log(id)
+                // this.list.some((item,i)=>{
+                //     if(item.id == id){
+                //         this.list.splice(i,1)
+                //         // 在数组的some方法中，如果return true就会立即停止后续循环
+                //         return true
+                //     }
+                // })
+                let index = this.selectedList.findIndex(item=>{
+                    if(item.id == id){
+                        return true
+                    }
+                })
+                this.selectedList.splice(index,1)
+            },
+            search(keywords){
+                // let newList = []
+                // this.list.forEach(item=>{
+                //     if(item.name.indexOf(keywords) != -1){
+                //         newList.push(item)
+                //     }
+                // })
+                // return newList
+                 let newList = this.list.filter(item=>{
+                    // if(item.name.indexOf(keywords) != -1){}
+                    if((item.name.includes(keywords) || item.teacher.includes(keywords) || item.id == (keywords))&& keywords != ''){
+                        return true
+                    }
+                })
+                return newList
+            }
+        },
+        // 私有（局部）过滤器——过滤器有两个条件-【过滤器名称和处理函数】
+        // 过滤器调用的原则为就近原则
+    })
+    
+    let classTable = new Vue({
+        el:"#app-table",
+    
+        data:{
+            /*课表共35个位置，把接收到的课程依次排序放入数组然后前端渲染出*/
+            unvalue:"暂无数据",
+            classList:[
+                {id:"微型计算机原理",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A124",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A125",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A126",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A127",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A128",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A129",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A130",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A131",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A132",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A133",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A134",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A135",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A136",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A137",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A138",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A139",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},
+                {id:"A140",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},
+                {id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},
+                {id:"",classname:"",classroom:"",teacher:"",classWeek:""}
+                ],
+  
+  Monday:[1,2,3,4,5,6,7],
+
+
+       },
+
+        methods:{
+        undefined(){
+                return undefined;
+                },
+
+        click(){
+            /*提供筛选条件并接返回的课表列表*/
+        },
+        addClassNum(){
+            /*如果，一个td里有两节课，但是他们的周次不一样，该怎么显示这两节课??*/
+
+        }
+
+        },
+        beforeMount(){
+            console.log (this.classList[34].id == undefined? this.unvalue :"我草泥马")
+            console.log (this.classList[0].length)
+            console.log (this.classList[34].id)
+            console.log (this.classList[34].id)
+            console.log (this.classList[34].id)
+            console.log (this.classList[34].id)
+            
+        }
+    })
+</script>
+</html>
