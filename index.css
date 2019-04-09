@@ -1,6 +1,6 @@
 body{
   font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
-  background-image: URL(bg2.jpg);
+  background-image: URL(src/images/bg2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }

@@ -18,3 +18,5 @@
     2.课程原始数据的获取；
     3.筛选的次序；
     4.筛选错误时如选择的课程和删除的时间的冲突时怎么处理。
+### 预览图片
+![demp预览](https://github.com/PENGFEI-CN/selectClass/tree/master,"预览")
