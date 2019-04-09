@@ -19,4 +19,4 @@
     3.筛选的次序；
     4.筛选错误时如选择的课程和删除的时间的冲突时怎么处理。
 ### 预览图片
-![demo预览](https://github.com/PENGFEI-CN/selectClass/blob/master/demoImage/1.png,"预览")
+![demo演示](https://github.com/PENGFEI-CN/selectClass/blob/master/demoImage/1.png "图片")
