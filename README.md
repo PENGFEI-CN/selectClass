@@ -22,8 +22,8 @@
     3.筛选的次序；
     4.筛选错误时如选择的课程和删除的时间的冲突时怎么处理。
 ### 预览图片
-![demo演示](https://github.com/PENGFEI-CN/selectClass/blob/master/demoImage/1.png "图片")
-
+![demo演示筛选](https://github.com/PENGFEI-CN/selectClass/blob/master/demoImage/2-1.png "图片")
+![demo演示课表](https://github.com/PENGFEI-CN/selectClass/blob/master/demoImage/2-2.png "图片")
 ### 更新
 	* 添加了header和footer的html文件，并在页面中进行了相应的引用，即用js的load函数（这需要将网站发布到本地服务器上才能生效，联想到less样式文件的引用也是需要发布）。引用html文件避免书写重复的代码，不过load似乎并不是很好的方法，以后学习webpack模块化开发或许会有进一步的改进。
 	* 增加了一些动画效果（基于vue以及animate.css）
