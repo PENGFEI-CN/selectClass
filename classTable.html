@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100vh;">
+    <head>
+        <meta charset="utf-8">
+        <title>课表</title>
+        <!-- 引入vue.js -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="src/css/animate.css" />
+        <meta charset="utf-8"/>
+        <style>
+            [v-cloak]{
+                display: none;
+            }
+        </style>
+        <script type="text/javascript" src="index.js"></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="classTable.css">
+    </head>
+<body style="height: 100vh;">
+    <div id="header"></div>
+    <script>
+            $("#header").load("header.html"); 
+    </script>
+    <div class="container">
+        <div id="app-table">
+            <table class="table table-bordered" id="class-table">
+                <tbody>
+                    <tr height="37px" width="100%" style="border-radius: 5%;">
+                    <!-- 标题栏-->
+                        <th width="10%" bgcolor=" darkorchid" style="color: white" colspan="2">节次</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">上课时间</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">周日</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">周一</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">周二</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">周三</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">周四</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">周五</th>
+                        <th width="10%" bgcolor=" darkorchid" style="color: white">周六</th>
+                    </tr>
+                    <tr height="74px" align="center">
+                    <td rowspan="2" colspan="1">上午</td>
+                    <td rowspan="1">1-2</td>
+                    <td rowspan="1">8:00-8:45</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo"  :id="classList[num-1].id">
+                                <div class="classContainer" v-for="value in classList[num-1]">   
+                                        {{value}}
+                                </div>
+                            </div>
+                        </td>
+                    <!--
+                    <td rowspan="1" bgcolor="orange">WEB应用技术<br />@D座301</td>
+                    <td rowspan="1"></td>
+                    <td rowspan="1" bgcolor="hotpink">数据库原理<br />@E407</td>
+                    <td rowspan="1"></td>-->
+
+                    </tr>
+                    <tr height="74px" align="center">
+                    <td rowspan="1">3-4</td>
+                    <td rowspan="1">10:00-10:45</td>
+                    <td v-for="num in 7">
+                        <div class="classInfo" 
+                        :id="classList[num+6].id">
+                            <div class="classContainer" v-for="value in classList[num+6]">   
+                                    {{value}}
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+
+                    <tr height="74px" align="center">
+                    <td class="mtt_bgcolor_grey" rowspan="2" colspan="1">下午</td>
+                    <td rowspan="1">5-6</td>
+                    <td rowspan="1">11:50-12:35</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo" :id="classList[num+13].id">
+                                <div class="classContainer"  v-for="value in classList[num+13]">   
+                                        {{value}}
+                                </div>
+                            </div>
+                        </td>   
+                    </tr>
+
+
+                    <tr height="74px" align="center">
+                    <td rowspan="1">7-8</td>
+                    <td rowspan="1">14:55-15:40</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo" :id="classList[num+20].id">
+                                <div class="classContainer" v-for="value in classList[num+20]">   
+                                        {{value}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr height="74px" align="center">
+                    <td class="mtt_bgcolor_grey" rowspan="2" colspan="1">晚上</td>
+
+                    <td rowspan="1">9-10</td>
+                    <td rowspan="1">14:55-15:40</td>
+                    <td v-for="num in 7">
+                            <div class="classInfo" :id="(classList[num+27].id == '' ? unvalue :classList[num+27].id)">
+                                <div class="classContainer" v-for="value in classList[num+27]">   
+                                        {{value == ""? unvalue : value}}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>    
+        </div>  
+        <input class="btn btn-primary" type="button" value="下载课表">
+
+        
+    </div>
+    <div id="footer"></div>
+    <script>
+            $("#footer").load("test.html"); 
+    </script>
+<script>
+    let classTable = new Vue({
+        el:"#app-table",
+    
+        data:{
+            /*课表共35个位置，把接收到的课程依次排序放入数组然后前端渲染出*/
+            unvalue:"暂无数据",
+            classList:[
+                {id:"微型计算机原理",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A124",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A125",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A126",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A127",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A128",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A129",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A130",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A131",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A132",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A133",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A134",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A135",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A136",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A137",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A138",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A139",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},
+                {id:"A140",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},{id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},
+                {id:"A123",classname:"微型计算机原理",classroom:"E222",teacher:"车向泉",classWeek:"1-16周"},
+                {id:"",classname:"",classroom:"",teacher:"",classWeek:""}
+                ],
+            Monday:[1,2,3,4,5,6,7],
+       },
+
+        methods:{
+        undefined(){
+                return undefined;
+                },
+
+        click(){
+            /*跳转到课表页面*/
+
+        },
+        addClassNum(){
+            /*如果，一个td里有两节课，但是他们的周次不一样，该怎么显示这两节课??*/
+
+        }
+
+        },
+        created() {
+
+        },
+        mounted(){
+        },
+
+    })
+</script>
+</body>
+</html>

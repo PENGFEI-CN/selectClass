@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="animate.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <input type="button" value="显示内容" onclick="change()">
+    <div id="app">
+            <button @click="change()">显示内容</button>
+          <h1>  {{flag}}</h1>
+    <div class="animated bounce a" v-if="flag"> asdasdasdasda </div>
+</div>
+</body>
+
+<script>
+function change(){
+    vm.flag = !vm.flag;   
+}
+let vm = new Vue({
+    el:"#app",
+data:{
+    flag:false
+},
+methods: {
+    change(){
+        this.flag = ! this.flag
+}
+}
+})
+
+
+</script>
+<style>
+    .app:hover{
+        display: none;
+    }
+
+</style>
+</html>

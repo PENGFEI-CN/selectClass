@@ -40,3 +40,9 @@
 #A134{
     background-color: black;
 }
+#app-table{
+    margin-top: 40px;
+}
+th{
+    border-radius: 5%;
+}

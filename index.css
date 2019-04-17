@@ -1,12 +1,47 @@
 body{
   font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
-  background-image: URL(src/images/bg2.jpg);
+  background-image: URL(src/images/bgimage.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
 head{
   font-size: 10px;
 }
+#header{
+  border:0;
+  margin: 0;
+  padding: 0;
+}
+.table-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form-inline{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn{
+  margin: 20px auto;
+}
+#footer-info{
+  background-color: #2d2d2d;
+
+}
+#app-table{
+  border: 8px solid white;
+  border-radius: 5%;
+  display: flex;
+  align-items: center;
+}
+#footer{
+  position: relative; 
+  width:100%;
+  bottom: -100px;
+  height:80px;
+}
+
 .container{
   display: flex;
   flex-direction:column;
@@ -73,7 +108,7 @@ input::-webkit-input-placeholder {
 }
 
 #class-table{
-  margin-top: 50px;
+  margin: 0!important;
 }
 .app{
   max-height:600px;

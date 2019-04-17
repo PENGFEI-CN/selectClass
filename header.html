@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+ 
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" type="text/css" href="src/css/animate.css" />
+    <style>
+        .v-enter-active,
+        .v-leave-active {
+            transition: all .8s ease;
+        }
+
+        .v-enter, .v-leave-to{
+            transform: translateY(-100px);
+            opacity: 0;
+        }</style>
+    </head>
+<body>
+        <nav class="navbar-default" id="navbar" role="navigation">
+            <img src="src/images/logo.jpg" width="" height="50px">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">选课系统</a>
+                </div>
+                <div id="app">
+                    <div>
+                        <ul class="ullist nav navbar-nav">
+                            <li class="divider"><a href="/question.html">问题反馈</a></li>
+                            <li class="divider tri"  @click.prevent="showthis()">
+                                <div>
+                                <a href="" style="display: block;">组员 </a></div><div class="trian"></div>
+                            </li>
+                            <transition mode="out-in">
+                                <component :is="componentId"></component>
+                            </transition>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            </nav>
+            <script>
+            Vue.component('show',{
+            template:'<li class="new"><a>彭飞,刘浩天,刘玖樽,刘立近,马诗佳</a></li>'
+                })
+            Vue.component('hide',{
+            template:'<li class="hide"></li>'
+                })
+            let vm = new Vue({
+                el: '#app',
+                data:{
+                    members:["彭飞","刘浩天","刘玖樽","刘立近","马诗佳"],
+                    componentId: 'hide'
+                },
+                methods:{
+                    showthis(){
+                        if(this.componentId == 'show'){
+                            this.componentId = 'hide';
+                        }
+                        else{
+                            this.componentId = 'show';
+                        }
+                    }
+                }
+            })
+            </script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</body>
+</html>
