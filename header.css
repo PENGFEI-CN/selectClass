@@ -24,7 +24,7 @@
 .navbar-header{
     margin: 10px;
 }
-a{
+.ullist a{
     color: aliceblue!important;
 }
 li:hover{
